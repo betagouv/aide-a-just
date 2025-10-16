@@ -9,8 +9,7 @@
     "ng": "ng",
     "start:ca": "ng serve --configuration development-ca",
     "start:tj": "ng serve --configuration development-tj",
-    "build:ca": "npm install --include=dev && --configuration ${BUILD_ENV}",
-    "build:tj": "npm install --include=dev && ng build --configuration production-tj"
+    "build": "npm install --include=dev && ng build --configuration ${BUILD_ENV}"
   },
   "prettier": {
     "printWidth": 100,
