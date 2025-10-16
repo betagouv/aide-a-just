@@ -1,0 +1,1 @@
+web: node server.js --stack-trace-limit=100
