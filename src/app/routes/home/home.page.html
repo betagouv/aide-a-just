@@ -106,18 +106,99 @@
                   </p>
                 }
 
-                <ul *ngIf="node.type === 'list-unordered'">
-                  <li *ngFor="let item of node.nodes">
-                    <ng-container *ngFor="let itemList of item.nodes">
-                      <p *ngIf="itemList.type === 'paragraph'">
-                        <ng-container *ngFor="let textNode of itemList.nodes">
-                          <ng-container *ngFor="let leaf of textNode.leaves">
-                            <span class="ordered-list-title" [ngClass]="{ bold: isBold(leaf) }">{{ leaf.text }}</span>
-                          </ng-container>
+                @if (node.type === 'list-unordered') {
+                  <ul>
+                    @for (item of node.nodes; track item.nodes) {
+                      <li>
+                        @for (itemList of item.nodes; track itemList.nodes) {
+                          @if (itemList.type === 'paragraph') {
+                            <p>
+                              @for (textNode of itemList.nodes; track textNode.leaves) {
+                                @for (leaf of textNode.leaves; track leaf.text) {
+                                  <span class="ordered-list-title" [ngClass]="{ bold: isBold(leaf) }">
+                                    {{ leaf.text }}
+                                  </span>
+                                }
 
-                          <ng-container *ngIf="textNode.type === 'link'">
-                            <ng-container *ngFor="let links of textNode.nodes">
-                              <ng-container *ngFor="let leaf of links.leaves">
+                                @if (textNode.type === 'link') {
+                                  @for (links of textNode.nodes; track links.leaves) {
+                                    @for (leaf of links.leaves; track leaf.text) {
+                                      <a
+                                        target="_blank"
+                                        [href]="textNode?.data?.ref?.url"
+                                        [ngClass]="{
+                                          bold: isBold(leaf),
+                                          italic: isItalic(leaf),
+                                          underline: isUnderline(leaf),
+                                        }"
+                                      >
+                                        {{ leaf.text }}
+                                      </a>
+                                    }
+                                  }
+                                }
+                              }
+                            </p>
+                          }
+                          @if (itemList.type === 'link') {
+                            @for (links of itemList.nodes; track links.leaves) {
+                              @for (leaf of links.leaves; track leaf.text) {
+                                <a
+                                  target="_blank"
+                                  [href]="itemList?.data?.ref?.url"
+                                  [ngClass]="{
+                                    bold: isBold(leaf),
+                                    italic: isItalic(leaf),
+                                    underline: isUnderline(leaf),
+                                  }"
+                                >
+                                  {{ leaf.text }}
+                                </a>
+                              }
+                            }
+                          }
+
+                          <ng-container *ngIf="itemList.type === 'list-unordered'">
+                            @for (subItemList of itemList.nodes; track subItemList.nodes) {
+                              @for (subNodes of subItemList.nodes; track subNodes.nodes) {
+                                @for (textNode of subNodes.nodes; track textNode.leaves) {
+                                  @for (leaf of textNode.leaves; track leaf.text) {
+                                    <span [ngClass]="{ bold: isBold(leaf) }">{{ leaf.text }}</span>
+                                  }
+                                }
+                              }
+
+                              @if (subItemList.type === 'link') {
+                                @for (links of subItemList.nodes; track links.leaves) {
+                                  @for (leaf of links.leaves; track leaf.text) {
+                                    <a
+                                      target="_blank"
+                                      [href]="subItemList?.data?.ref?.url"
+                                      [ngClass]="{
+                                        bold: isBold(leaf),
+                                        italic: isItalic(leaf),
+                                        underline: isUnderline(leaf),
+                                      }"
+                                    >
+                                      {{ leaf.text }}
+                                    </a>
+                                  }
+                                }
+                              }
+                            }
+                          </ng-container>
+                        }
+
+                        @for (textNode of item.nodes; track textNode.leaves) {
+                          @for (leaf of textNode.leaves; track leaf.text) {
+                            @if (leaf.text) {
+                              {{ leaf.text }}
+                            }
+                          }
+
+                          @if (textNode.type === 'link') {
+                            @for (links of textNode.nodes; track links.leaves) {
+                              @for (leaf of links.leaves; track leaf.text) {
                                 <a
                                   target="_blank"
                                   [href]="textNode?.data?.ref?.url"
@@ -129,78 +210,14 @@
                                 >
                                   {{ leaf.text }}
                                 </a>
-                              </ng-container>
-                            </ng-container>
-                          </ng-container>
-                        </ng-container>
-                      </p>
-                      <ng-container *ngIf="itemList.type === 'link'">
-                        <ng-container *ngFor="let links of itemList.nodes">
-                          <ng-container *ngFor="let leaf of links.leaves">
-                            <a
-                              target="_blank"
-                              href="{{ itemList.data.ref.url }}"
-                              [ngClass]="{ bold: isBold(leaf), italic: isItalic(leaf), underline: isUnderline(leaf) }"
-                            >
-                              {{ leaf.text }}
-                            </a>
-                          </ng-container>
-                        </ng-container>
-                      </ng-container>
-
-                      <ng-container *ngIf="itemList.type === 'list-unordered'">
-                        <ng-container *ngFor="let subItemList of itemList.nodes">
-                          <ng-container *ngFor="let subNodes of subItemList.nodes">
-                            <ng-container *ngFor="let textNode of subNodes.nodes">
-                              <ng-container *ngFor="let leaf of textNode.leaves">
-                                <span [ngClass]="{ bold: isBold(leaf) }">{{ leaf.text }}</span>
-                              </ng-container>
-                            </ng-container>
-                          </ng-container>
-
-                          <ng-container *ngIf="subItemList.type === 'link'">
-                            <ng-container *ngFor="let links of subItemList.nodes">
-                              <ng-container *ngFor="let leaf of links.leaves">
-                                <a
-                                  target="_blank"
-                                  href="{{ subItemList.data.ref.url }}"
-                                  [ngClass]="{
-                                    bold: isBold(leaf),
-                                    italic: isItalic(leaf),
-                                    underline: isUnderline(leaf),
-                                  }"
-                                >
-                                  {{ leaf.text }}
-                                </a>
-                              </ng-container>
-                            </ng-container>
-                          </ng-container>
-                        </ng-container>
-                      </ng-container>
-                    </ng-container>
-
-                    <ng-container *ngFor="let textNode of item.nodes">
-                      <ng-container *ngFor="let leaf of textNode.leaves">
-                        <ng-container *ngIf="leaf.text">{{ leaf.text }}</ng-container>
-                      </ng-container>
-
-                      <ng-container *ngIf="textNode.type === 'link'">
-                        <ng-container *ngFor="let links of textNode.nodes">
-                          <ng-container *ngFor="let leaf of links.leaves">
-                            <a
-                              target="_blank"
-                              [href]="textNode?.data?.ref?.url"
-                              [ngClass]="{ bold: isBold(leaf), italic: isItalic(leaf), underline: isUnderline(leaf) }"
-                            >
-                              {{ leaf.text }}
-                            </a>
-                          </ng-container>
-                        </ng-container>
-                      </ng-container>
-                    </ng-container>
-                  </li>
-                </ul>
-                <!---->
+                              }
+                            }
+                          }
+                        }
+                      </li>
+                    }
+                  </ul>
+                }
 
                 @if (node.type === 'list-ordered') {
                   <ol>
@@ -273,17 +290,19 @@
                   </blockquote>
                 }
 
-                <pre *ngIf="node.type === 'code'">
+                @if (node.type === 'code') {
+                  <pre>
                             <code>
-                                <ng-container *ngFor="let textNode of node.nodes">
-                                    <ng-container *ngFor="let text of textNode.nodes">
-                                        <ng-container *ngFor="let leaf of text.leaves">
+                                @for(textNode of node.nodes; track textNode.leaves){
+                                    @for(text of textNode.nodes; track text.leaves){
+                                        @for(leaf of text.leaves; track leaf.text){
                                             {{ leaf.text }}
-                                        </ng-container>                                  
-                                  </ng-container>
-                                </ng-container>
+                                        }
+                                  }
+                                }
                             </code>
                         </pre>
+                }
               </ng-container>
             </div>
           }
@@ -292,14 +311,13 @@
           @if (data.answer.followupQuestions?.length) {
             <div class="separator">
               <h2>Questions liées</h2>
-              <ng-container *ngFor="let question of data.answer.followupQuestions">
+              @for (question of data.answer.followupQuestions; track question) {
                 <p
                   class="following"
                   (click)="
                     searchValue = question;
                     displayResult = true;
                     data = null;
-                    onSearchBy();
                     onSearchBy();
                     lockPrompt = true;
                     scrollTo('toolbar');
@@ -309,7 +327,7 @@
                   <i class="ri-arrow-right-line"></i>
                   {{ question }}
                 </p>
-              </ng-container>
+              }
             </div>
           }
 
@@ -455,5 +473,3 @@
     <div class="hide-powered-by-gitbook"></div>
   </div>
 }
-
-<ng-template #actions></ng-template>
