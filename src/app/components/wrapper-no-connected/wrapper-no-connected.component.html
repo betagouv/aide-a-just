@@ -7,16 +7,12 @@
   </div>
   }
   <div [ngClass]="['content-panel', contentPadding ? '' : 'no-padding']">
-    <div class="logo">
+    <a routerLink="/" class="logo">
       <img src="/icons/bloc-marque/bloc-marque-white@2x.svg" alt="ministère de la justice" />
       <img src="/icons/logos/white-192x192@1x.svg" alt="a-just" />
-    </div>
+    </a>
     <div>
-      <aj-button
-        title="Retour"
-        showLeftIcon="ri-arrow-left-s-line"
-        [url]="environment.sourceUrl"
-      ></aj-button>
+      <aj-button title="Retour" showLeftIcon="ri-arrow-left-s-line" [url]="environment.sourceUrl"></aj-button>
     </div>
     <aj-switch-line [keySelected]="switchLinekeySelected"></aj-switch-line>
     <ng-content></ng-content>

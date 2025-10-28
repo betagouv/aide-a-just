@@ -8,6 +8,7 @@ import { SWITCH_LINE_KEY_APPOINTMENT } from '../../constants/switch-line.constan
  */
 
 @Component({
+  selector: 'aj-meet-page',
   standalone: true,
   imports: [WrapperNoConnectedComponent],
   templateUrl: './meet.page.html',

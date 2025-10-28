@@ -6,6 +6,7 @@ import { Title } from '@angular/platform-browser';
  */
 
 @Component({
+  selector: 'aj-home-page',
   standalone: true,
   imports: [],
   templateUrl: './home.page.html',

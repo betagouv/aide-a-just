@@ -8,6 +8,7 @@ import { SWITCH_LINE_KEY_CALL } from '../../constants/switch-line.constants';
  */
 
 @Component({
+  selector: 'aj-call-page',
   standalone: true,
   imports: [WrapperNoConnectedComponent],
   templateUrl: './call.page.html',

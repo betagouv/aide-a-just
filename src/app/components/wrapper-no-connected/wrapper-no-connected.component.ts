@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ButtonComponent } from '../button/button.component';
 import { environment } from '../../../environments/environment';
 import { SwitchLineComponent } from '../switch-line/switch-line.component';
+import { RouterModule } from '@angular/router';
 
 /**
  * Composant de mise en page en mode non connecté
@@ -11,7 +12,7 @@ import { SwitchLineComponent } from '../switch-line/switch-line.component';
 @Component({
   selector: 'aj-wrapper-no-connected',
   standalone: true,
-  imports: [CommonModule, ButtonComponent, SwitchLineComponent],
+  imports: [CommonModule, ButtonComponent, SwitchLineComponent, RouterModule],
   templateUrl: './wrapper-no-connected.component.html',
   styleUrls: ['./wrapper-no-connected.component.scss'],
 })
