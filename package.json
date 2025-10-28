@@ -11,18 +11,6 @@
     "start:tj": "ng serve --configuration development-tj",
     "build": "npm install --include=dev && ng build --configuration ${BUILD_ENV}"
   },
-  "prettier": {
-    "printWidth": 100,
-    "singleQuote": true,
-    "overrides": [
-      {
-        "files": "*.html",
-        "options": {
-          "parser": "angular"
-        }
-      }
-    ]
-  },
   "private": true,
   "dependencies": {
     "@angular/common": "^20.3.0",
@@ -33,6 +21,7 @@
     "@angular/router": "^20.3.0",
     "compression": "^1.8.1",
     "express": "^5.1.0",
+    "remixicon": "^4.7.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.15.0"

@@ -1,0 +1,70 @@
+html,
+body,
+button,
+textarea,
+select,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+input {
+  font-family: "Marianne";
+  margin: 0;
+}
+
+h1 {
+  font-size: 40px;
+  line-height: 48px;
+  color: #3a3a3a;
+}
+
+h2 {
+  font-size: 32px;
+  line-height: 40px;
+  color: #3a3a3a;
+}
+
+h3 {
+  font-size: 28px;
+  line-height: 36px;
+  color: #3a3a3a;
+
+  b {
+    color: #000091;
+  }
+}
+
+h4 {
+  font-size: 22px;
+  line-height: 32px;
+  color: #3a3a3a;
+}
+
+h5 {
+  font-size: 22px;
+  line-height: 28px;
+  color: #3a3a3a;
+}
+
+h6 {
+  font-size: 20px;
+  line-height: 28px;
+  color: #3a3a3a;
+}
+
+p,
+li {
+  font-size: 16px;
+  color: #3a3a3a;
+
+  &.s {
+    font-size: 14px;
+  }
+
+  &.xs {
+    font-size: 11px;
+  }
+}

@@ -1,0 +1,27 @@
+@if (url && url.startsWith('http')) {
+<a [href]="url">
+  @if (showLeftIcon) {
+  <i [class]="showLeftIcon"></i>
+  }
+  <p>{{ title }}</p>
+  @if (showRightIcon) {
+  <i [class]="showRightIcon"></i>
+  }
+</a>
+} @else if (url) {
+<a [routerLink]="url">
+  @if (showLeftIcon) {
+  <i [class]="showLeftIcon"></i>
+  }
+  <p>{{ title }}</p>
+  @if (showRightIcon) {
+  <i [class]="showRightIcon"></i>
+  }
+</a>
+} @else { @if (showLeftIcon) {
+<i [class]="showLeftIcon"></i>
+}
+<p>{{ title }}</p>
+@if (showRightIcon) {
+<i [class]="showRightIcon"></i>
+} }

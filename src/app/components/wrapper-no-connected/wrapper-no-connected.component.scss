@@ -41,7 +41,17 @@
 }
 
 .content-panel {
-  padding: 40px 64px;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+
+  .logo {
+    >img {
+      height: 90px;
+      margin-right: 27px;
+    }
+  }
 }
 
 .no-padding {

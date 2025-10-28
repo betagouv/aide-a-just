@@ -31,7 +31,12 @@
                 "input": "src/assets"
               }
             ],
-            "styles": ["src/styles.scss"]
+            "styles": [
+              "src/styles.scss",
+              "src/app/styles/typography.scss",
+              "src/app/styles/fonts/marianne/Marianne.scss",
+              "node_modules/remixicon/fonts/remixicon.scss"
+            ]
           },
           "configurations": {
             "production-ca": {

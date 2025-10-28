@@ -1,0 +1,21 @@
+<p>Nous contacter</p>
+<div class="buttons-container">
+  <aj-button
+    title="Par email"
+    showLeftIcon="ri-mail-line"
+    url="/contact"
+    [class]="SWITCH_LINE_KEY_EMAIL === keySelected ? 'border-blue' : 'no-border'"
+  ></aj-button>
+  <aj-button
+    title="Être rappelé"
+    showLeftIcon="ri-phone-line"
+    [class]="SWITCH_LINE_KEY_CALL === keySelected ? 'border-blue' : 'no-border'"
+    url="/etre-appele"
+  ></aj-button>
+  <aj-button
+    title="Prendre rendez-vous"
+    showLeftIcon="ri-calendar-line"
+    [class]="SWITCH_LINE_KEY_APPOINTMENT === keySelected ? 'border-blue' : 'no-border'"
+    url="/prendre-rendez-vous"
+  ></aj-button>
+</div>

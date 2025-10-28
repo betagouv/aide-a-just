@@ -1,5 +1,8 @@
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ButtonComponent } from '../button/button.component';
+import { environment } from '../../../environments/environment';
+import { SwitchLineComponent } from '../switch-line/switch-line.component';
 
 /**
  * Composant de mise en page en mode non connecté
@@ -8,7 +11,7 @@ import { CommonModule } from '@angular/common';
 @Component({
   selector: 'aj-wrapper-no-connected',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, ButtonComponent, SwitchLineComponent],
   templateUrl: './wrapper-no-connected.component.html',
   styleUrls: ['./wrapper-no-connected.component.scss'],
 })
@@ -25,4 +28,14 @@ export class WrapperNoConnectedComponent {
    * Ajout ou non de padding sur le contenu
    */
   @Input() contentPadding: boolean = true;
+  /**
+   * Clé sélectionnée
+   */
+  @Input() switchLinekeySelected: string = '';
+
+  protected readonly environment = environment;
+  /**
+   * Clé sélectionnée
+   */
+  @Input() keySelected: string = '';
 }

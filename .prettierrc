@@ -1,0 +1,20 @@
+{
+  "tabWidth": 2,
+  "useTabs": false,
+  "singleQuote": true,
+  "semi": true,
+  "bracketSpacing": true,
+  "printWidth": 120,
+  "htmlWhitespaceSensitivity": "ignore",
+  "overrides": [
+    {
+      "files": "*.html",
+      "options": {
+        "parser": "angular",
+        "tabWidth": 2,
+        "printWidth": 120,
+        "htmlWhitespaceSensitivity": "ignore"
+      }
+    }
+  ]
+}
