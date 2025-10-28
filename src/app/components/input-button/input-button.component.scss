@@ -1,10 +1,8 @@
-@use "../../styles/utils.scss" as utils;
-
 :host {
   display: block;
   border-radius: 4px;
-  background-color: utils.$colors-bgSelect;
-  border: 1px solid utils.$colors-borderSelect;
+  background-color: #f6f6f6;
+  border: 1px solid #eeeeee;
   height: 55px;
   cursor: pointer;
   display: flex;
@@ -25,8 +23,8 @@
   }
 
   &.dark-mode {
-    background-color: utils.$colors-darkModeBgMenu;
-    border: 1px solid utils.$colors-darkModeBgMenu;
+    background-color: #272747;
+    border: 1px solid #272747;
 
     &.search-bar {
       .input {
@@ -52,7 +50,7 @@
     }
 
     p.title {
-      color: utils.$colors-headerColor;
+      color: #cecece;
     }
   }
 
@@ -75,7 +73,7 @@
         font-size: 16px;
 
         &::placeholder {
-          color: utils.$colors-cgray;
+          color: #666666;
         }
 
         &:focus {
@@ -106,10 +104,10 @@
       background-color: white;
       border-top-right-radius: 8px;
       border-bottom-right-radius: 8px;
-      border: 1px solid utils.$colors-cbluedark;
+      border: 1px solid #000091;
 
       mat-icon {
-        color: utils.$colors-cbluedark;
+        color: #000091;
       }
     }
   }
