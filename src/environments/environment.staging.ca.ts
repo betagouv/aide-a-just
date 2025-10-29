@@ -13,8 +13,7 @@ export const environment = {
   /**
    * Lien de la calculate
    */
-  CALCULATE_DOWNLOAD_URL:
-    sourceUrl + '/assets/Calculatrice_de_ventilation_du_temps_par_activité_A-JUST_MAG_et_GRF.xlsx',
+  CALCULATE_DOWNLOAD_URL: sourceUrl + 'assets/Calculatrice_de_ventilation_du_temps_par_activité_A-JUST_MAG_et_GRF.xlsx',
   /**
    * Lien pour le guide de la donnée de CA
    */
@@ -22,9 +21,9 @@ export const environment = {
   /**
    * URL de la nomenclature TJ
    */
-  NOMENCLATURE_DOWNLOAD_URL: sourceUrl + '/assets/nomenclature-A-Just-CA.html',
+  NOMENCLATURE_DOWNLOAD_URL: sourceUrl + 'assets/nomenclature-A-Just-CA.html',
   /**
    * URL de la nomenclature TJ avec droit local
    */
-  NOMENCLATURE_DROIT_LOCAL_DOWNLOAD_URL: sourceUrl + '/assets/nomenclature-A-Just-CA.html',
+  NOMENCLATURE_DROIT_LOCAL_DOWNLOAD_URL: sourceUrl + 'assets/nomenclature-A-Just-CA.html',
 };

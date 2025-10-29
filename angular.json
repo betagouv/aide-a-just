@@ -34,7 +34,9 @@
             ],
             "styles": [
               "src/styles.scss",
+              "src/app/styles/button.scss",
               "src/app/styles/typography.scss",
+              "src/app/styles/form.scss",
               "src/app/styles/fonts/marianne/Marianne.scss",
               "node_modules/remixicon/fonts/remixicon.scss"
             ]

@@ -1,5 +1,17 @@
+<div class="header">
+  <img src="/assets/icons/bloc-marque/bloc-marque-white@2x.svg" alt="ministère de la justice" />
+  <img src="/assets/icons/logos/white-192x192@1x.svg" alt="a-just" />
+  <h1>Centre d'aide</h1>
+</div>
+
 @if (openSuggestionPanel === false) {
   <div id="toolbar" class="toolbar">
+    <aj-button
+      title="Retour sur A-JUST"
+      showLeftIcon="ri-arrow-left-s-line"
+      [url]="environment.sourceUrl"
+      class="border-blue no-bottom-border-radius"
+    ></aj-button>
     @for (card of docTools; track card.title) {
       <div>
         <img [src]="card.image" alt="a-just" (click)="goToLink(card.url)" />
@@ -16,7 +28,7 @@
       <img src="/assets/images/community.svg" alt="a-just" />
 
       @if (!environment.isCA) {
-        <p class="sub-title">Saisissez votre question ci-dessous</p>
+        <!-- IA <p class="sub-title">Saisissez votre question ci-dessous</p>
         <div class="research-area"></div>
         <aj-input-button
           #searchInput
@@ -43,7 +55,7 @@
               [ngStyle]="{ color: searchValue.length > 0 && !lockPrompt ? '#3a3a3a' : 'lightgray' }"
             ></i>
           </div>
-        </aj-input-button>
+        </aj-input-button>-->
       }
     </div>
     <div class="line"></div>
@@ -420,6 +432,13 @@
           </div>
         </div>
       }
+
+      @if (webinaires && webinaires.length === 0) {
+        <div class="no-webinaires">
+          <p>Pas de webinaire programmé pour le moment</p>
+          <p><a href="mailto:support@a-just.fr">Soumettre le sujet d’un prochain webinaire</a></p>
+        </div>
+      }
     </div>
   }
 }
@@ -427,7 +446,12 @@
   <div class="open-panel animate__animated">
     <div class="suggestion-header">
       <div class="back-title">
-        <!-- TODO <aj-back-button (click)="openSuggestionPanel = !openSuggestionPanel" /> -->
+        <aj-button
+          title="Retour"
+          showLeftIcon="ri-arrow-left-s-line"
+          (click)="openSuggestionPanel = !openSuggestionPanel"
+          class="border-blue no-bottom-border-radius"
+        />
         <p>Aide</p>
       </div>
       <div class="panel-header">

@@ -10,8 +10,9 @@ import { FormsModule } from '@angular/forms';
 import { ReferentielService } from '../../services/referentiel/referentiel.service';
 import { downloadFile } from '../../utils/system';
 import { environment } from '../../../environments/environment';
-import { InputButtonComponent } from '../../components/input-button/input-button.component';
+//import { InputButtonComponent } from '../../components/input-button/input-button.component';
 import { RouterModule } from '@angular/router';
+import { ButtonComponent } from '../../components/button/button.component';
 
 interface webinaire {
   img: string;
@@ -27,7 +28,15 @@ interface webinaire {
 @Component({
   selector: 'aj-home-page',
   standalone: true,
-  imports: [CommonModule, MatIconModule, SanitizeResourceUrlPipe, FormsModule, InputButtonComponent, RouterModule],
+  imports: [
+    CommonModule,
+    MatIconModule,
+    SanitizeResourceUrlPipe,
+    FormsModule,
+    //InputButtonComponent,
+    RouterModule,
+    ButtonComponent,
+  ],
   templateUrl: './home.page.html',
   styleUrls: ['./home.page.scss'],
 })
@@ -124,7 +133,7 @@ export class HomePage implements OnInit, AfterViewInit {
           title: 'L’extracteur de données d’effectifs',
           description: '',
           image: '/assets/images/Tableur.svg',
-          url: '/dashboard',
+          url: environment.sourceUrl + 'dashboard',
           localUrl: true,
         },
         {
@@ -132,7 +141,7 @@ export class HomePage implements OnInit, AfterViewInit {
           title: 'L’extracteur de données d’activité',
           description: '',
           image: '/assets/images/Tableur2.svg',
-          url: '/dashboard',
+          url: environment.sourceUrl + 'dashboard',
           localUrl: true,
         },
       ];
@@ -339,8 +348,9 @@ export class HomePage implements OnInit, AfterViewInit {
         text: "Le téléchargement va démarrer : cette opération peut, selon votre ordinateur, prendre plusieurs secondes. Merci de patienter jusqu'à l'ouverture de votre fenêtre de téléchargement.",
       });
 
-    if (url === '/dashboard') window.location.href = url;
-    else {
+    if ((url || '').startsWith('http')) {
+      window.location.href = url;
+    } else {
       if (download) {
         downloadFile(url);
       } else {
