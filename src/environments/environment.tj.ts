@@ -26,4 +26,6 @@ export const environment = {
    * URL de la nomenclature TJ avec droit local
    */
   NOMENCLATURE_DROIT_LOCAL_DOWNLOAD_URL: sourceUrl + 'assets/nomenclature-A-Just-TJ-droit-local.html',
+  contactFormId: '0f776962-cddf-4ccb-b2a8-100936289ebb',
+  callFormId: '229eda51-8847-45e9-a629-74a59e6bc551',
 };

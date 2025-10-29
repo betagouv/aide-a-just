@@ -26,4 +26,6 @@ export const environment = {
    * URL de la nomenclature TJ avec droit local
    */
   NOMENCLATURE_DROIT_LOCAL_DOWNLOAD_URL: sourceUrl + 'assets/nomenclature-A-Just-CA.html',
+  contactFormId: '55b2e675-21c3-4a6e-866f-b53133348abf',
+  callFormId: 'f9d3762c-4c24-4671-b38a-b97cc00e9a47',
 };
