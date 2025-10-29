@@ -1,14 +1,13 @@
 @if (alertMessage) {
-    <aj-alert
-      [alertMessage]="alertMessage.text"
-      [alertTitle]="alertMessage.title"
-      [okText]="alertMessage.okText"
-      [classPopin]="alertMessage.classPopin"
-      [delay]="alertMessage.delay"
-      [secondaryText]="alertMessage.secondaryText"
-      (onClose)="onCloseAlert()"
-      (onCloseSecondary)="onCloseAlertSecondary($event)"
-    ></aj-alert>
-  }
-<h1>{{ environment.environment }}</h1>
+  <aj-alert
+    [alertMessage]="alertMessage.text"
+    [alertTitle]="alertMessage.title"
+    [okText]="alertMessage.okText"
+    [classPopin]="alertMessage.classPopin"
+    [delay]="alertMessage.delay"
+    [secondaryText]="alertMessage.secondaryText"
+    (onClose)="onCloseAlert()"
+    (onCloseSecondary)="onCloseAlertSecondary($event)"
+  ></aj-alert>
+}
 <router-outlet></router-outlet>

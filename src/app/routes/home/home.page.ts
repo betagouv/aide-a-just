@@ -1,10 +1,4 @@
-import {
-  AfterViewInit,
-  Component,
-  inject,
-  OnInit,
-  ViewChild,
-} from '@angular/core';
+import { AfterViewInit, Component, inject, OnInit, ViewChild } from '@angular/core';
 import { GitBookAPI } from '@gitbook/api';
 import { CommonModule } from '@angular/common';
 import { DocCardInterface } from '../../components/doc-card/doc-card.component';
@@ -17,6 +11,7 @@ import { ReferentielService } from '../../services/referentiel/referentiel.servi
 import { downloadFile } from '../../utils/system';
 import { environment } from '../../../environments/environment';
 import { InputButtonComponent } from '../../components/input-button/input-button.component';
+import { RouterModule } from '@angular/router';
 
 interface webinaire {
   img: string;
@@ -32,14 +27,7 @@ interface webinaire {
 @Component({
   selector: 'aj-home-page',
   standalone: true,
-  imports: [
-    CommonModule,
-    MatIconModule,
-    SanitizeResourceUrlPipe,
-    //BackButtonComponent,
-    FormsModule,
-    InputButtonComponent,
-  ],
+  imports: [CommonModule, MatIconModule, SanitizeResourceUrlPipe, FormsModule, InputButtonComponent, RouterModule],
   templateUrl: './home.page.html',
   styleUrls: ['./home.page.scss'],
 })
@@ -107,50 +95,47 @@ export class HomePage implements OnInit, AfterViewInit {
   /**
    * Cards documentation
    */
-  docCards: Array<DocCardInterface> = [
-    this.userGuide,
-    this.dataBook,
-    this.nomenclature,
-  ];
+  docCards: Array<DocCardInterface> = [this.userGuide, this.dataBook, this.nomenclature];
   /**
    * Cards outils
    */
-  docTools: Array<DocCardInterface> = 
-  environment.isCA ? [
-    this.nomenclature,
-    {
-      tag: 'Les outils A-JUST',
-      title: 'La calculatrice de ventilation des ETPT',
-      description: '',
-      image: '/assets/images/coding.svg',
-      url: environment.CALCULATE_DOWNLOAD_URL,
-    },
-  ] : [
-    this.nomenclature,
-    {
-      tag: 'Les outils A-JUST',
-      title: 'La calculatrice de ventilation des ETPT',
-      description: '',
-      image: '/assets/images/coding.svg',
-      url: environment.CALCULATE_DOWNLOAD_URL,
-    },
-    {
-      tag: 'Les outils A-JUST',
-      title: 'L’extracteur de données d’effectifs',
-      description: '',
-      image: '/assets/images/Tableur.svg',
-      url: '/dashboard',
-      localUrl: true,
-    },
-    {
-      tag: 'Les outils A-JUST',
-      title: 'L’extracteur de données d’activité',
-      description: '',
-      image: '/assets/images/Tableur2.svg',
-      url: '/dashboard',
-      localUrl: true,
-    },
-  ];
+  docTools: Array<DocCardInterface> = environment.isCA
+    ? [
+        this.nomenclature,
+        {
+          tag: 'Les outils A-JUST',
+          title: 'La calculatrice de ventilation des ETPT',
+          description: '',
+          image: '/assets/images/coding.svg',
+          url: environment.CALCULATE_DOWNLOAD_URL,
+        },
+      ]
+    : [
+        this.nomenclature,
+        {
+          tag: 'Les outils A-JUST',
+          title: 'La calculatrice de ventilation des ETPT',
+          description: '',
+          image: '/assets/images/coding.svg',
+          url: environment.CALCULATE_DOWNLOAD_URL,
+        },
+        {
+          tag: 'Les outils A-JUST',
+          title: 'L’extracteur de données d’effectifs',
+          description: '',
+          image: '/assets/images/Tableur.svg',
+          url: '/dashboard',
+          localUrl: true,
+        },
+        {
+          tag: 'Les outils A-JUST',
+          title: 'L’extracteur de données d’activité',
+          description: '',
+          image: '/assets/images/Tableur2.svg',
+          url: '/dashboard',
+          localUrl: true,
+        },
+      ];
   /**
    * webinaire
    */
@@ -201,11 +186,11 @@ export class HomePage implements OnInit, AfterViewInit {
   /**
    * GITBOOK ID
    */
-  gitbookId = environment.NG_APP_GITBOOK_ID;
+  gitbookId = import.meta.env.NG_APP_GITBOOK_ID;
   /**
    * Organisation ID gitbook
    */
-  organisationId = environment.NG_APP_GITBOOK_ORG_ID;
+  organisationId = import.meta.env.NG_APP_GITBOOK_ORG_ID;
   /**
    * Bloqueur pour le prompteur en cas de valeur vide dans la barre de recherche
    */
@@ -222,7 +207,7 @@ export class HomePage implements OnInit, AfterViewInit {
    * Constructeur
    */
   constructor() {
-    this.gitToken = environment.NG_APP_GITBOOK_TOKEN;
+    this.gitToken = import.meta.env.NG_APP_GITBOOK_TOKEN;
     this.gitbook = new GitBookAPI({
       authToken: this.gitToken,
     });
@@ -249,10 +234,7 @@ export class HomePage implements OnInit, AfterViewInit {
 
   async onSearchBy() {
     this.displayLoader = true;
-    const { data } = await this.gitbook.orgs.askInOrganization(
-      this.organisationId,
-      { query: this.searchValue }
-    );
+    const { data } = await this.gitbook.orgs.askInOrganization(this.organisationId, { query: this.searchValue });
     console.log(this.gitbook);
     console.log(data);
     this.data = data;
@@ -288,21 +270,13 @@ export class HomePage implements OnInit, AfterViewInit {
 
     switch (title) {
       case "Guide d'utilisateur A-JUST CA":
-        window.open(
-          'https://docs.a-just.beta.gouv.fr/guide-dutilisateur-a-just-ca/' +
-            researchRes.path
-        );
+        window.open('https://docs.a-just.beta.gouv.fr/guide-dutilisateur-a-just-ca/' + researchRes.path);
         break;
       case "Guide d'utilisateur A-JUST":
-        window.open(
-          'https://docs.a-just.beta.gouv.fr/documentation-deploiement/' +
-            researchRes.path
-        );
+        window.open('https://docs.a-just.beta.gouv.fr/documentation-deploiement/' + researchRes.path);
         break;
       case 'Le data-book':
-        window.open(
-          'https://docs.a-just.beta.gouv.fr/le-data-book/' + researchRes.path
-        );
+        window.open('https://docs.a-just.beta.gouv.fr/le-data-book/' + researchRes.path);
         break;
       default:
         break;
@@ -342,11 +316,9 @@ export class HomePage implements OnInit, AfterViewInit {
    * Envoie de log
    */
   async sendLog() {
-    await this.serverService
-      .post('centre-d-aide/log-documentation')
-      .then((r) => {
-        return r.data;
-      });
+    await this.serverService.post('centre-d-aide/log-documentation').then((r) => {
+      return r.data;
+    });
   }
 
   /**
@@ -390,37 +362,24 @@ export class HomePage implements OnInit, AfterViewInit {
    */
   async loadWebinaires() {
     this.webinaires = new Array();
-    const { data } = await this.gitbook.spaces.getPageByPath(
-      this.gitbookId,
-      'accueil/'
-    );
+    const { data } = await this.gitbook.spaces.getPageByPath(this.gitbookId, 'accueil/');
 
     await Promise.all(
       data.pages.map(async (page, index) => {
-        const { data } = (await this.gitbook.spaces.getPageById(
-          this.gitbookId,
-          page.id
-        )) as any;
+        const { data } = (await this.gitbook.spaces.getPageById(this.gitbookId, page.id)) as any;
         try {
           let webinaire = {
             img: data.document?.nodes[0].data.url,
             title: data.title,
             content: data.document?.nodes[1].nodes[0].leaves[0].text,
-            action: [
-              data.document.nodes[2].data.url || null,
-              data.document.nodes[3]?.data.url || null,
-            ],
+            action: [data.document.nodes[2].data.url || null, data.document.nodes[3]?.data.url || null],
             rank: index,
           };
-          if (data.title.includes('[CACHER]') === false)
-            this.webinaires?.push(webinaire);
+          if (data.title.includes('[CACHER]') === false) this.webinaires?.push(webinaire);
         } catch (error) {
-          console.log(
-            "Le format du webinaire gitbook n'est pas conforme",
-            data
-          );
+          console.log("Le format du webinaire gitbook n'est pas conforme", data);
         }
-      })
+      }),
     ).then(() => {
       this.webinaires?.sort((a, b) => a.rank - b.rank);
       console.log(this.webinaires);
@@ -493,9 +452,7 @@ export class HomePage implements OnInit, AfterViewInit {
    * @returns
    */
   getUnorderedListNodes(item: any) {
-    return (
-      item.nodes?.find((n: any) => n.type === 'list-unordered')?.nodes || []
-    );
+    return item.nodes?.find((n: any) => n.type === 'list-unordered')?.nodes || [];
   }
   /**
    * recupère les éléments d'une liste non ordronnée
@@ -520,24 +477,24 @@ export class HomePage implements OnInit, AfterViewInit {
   }
 
   scrollTo(id: string, dom?: any, detalScrollY?: number) {
-    const findElement = dom ? dom : document.getElementById('content')
-    const findIdElement = document.getElementById(id)
+    const findElement = dom ? dom : document.getElementById('content');
+    const findIdElement = document.getElementById(id);
 
-    console.log('findElement', findElement)
-    console.log('findIdElement', findIdElement)
+    console.log('findElement', findElement);
+    console.log('findIdElement', findIdElement);
 
     if (findElement && findIdElement) {
-      const findTopElement = document.getElementById('top')
-      let deltaToRemove = 0
+      const findTopElement = document.getElementById('top');
+      let deltaToRemove = 0;
 
       if (findTopElement) {
-        deltaToRemove = findTopElement.getBoundingClientRect().height
+        deltaToRemove = findTopElement.getBoundingClientRect().height;
       }
 
       findElement.scrollTo({
         behavior: 'smooth',
         top: findElement.scrollTop + findIdElement.getBoundingClientRect().top - deltaToRemove - (detalScrollY || 0),
-      })
+      });
     }
   }
 }
