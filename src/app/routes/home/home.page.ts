@@ -108,43 +108,32 @@ export class HomePage implements OnInit, AfterViewInit {
   /**
    * Cards outils
    */
-  docTools: Array<DocCardInterface> = environment.isCA
-    ? [
-        this.nomenclature,
-        {
-          tag: 'Les outils A-JUST',
-          title: 'La calculatrice de ventilation des ETPT',
-          description: '',
-          image: '/assets/images/coding.svg',
-          url: environment.CALCULATE_DOWNLOAD_URL,
-        },
-      ]
-    : [
-        this.nomenclature,
-        {
-          tag: 'Les outils A-JUST',
-          title: 'La calculatrice de ventilation des ETPT',
-          description: '',
-          image: '/assets/images/coding.svg',
-          url: environment.CALCULATE_DOWNLOAD_URL,
-        },
-        {
-          tag: 'Les outils A-JUST',
-          title: 'L’extracteur de données d’effectifs',
-          description: '',
-          image: '/assets/images/Tableur.svg',
-          url: environment.sourceUrl + 'dashboard',
-          localUrl: true,
-        },
-        {
-          tag: 'Les outils A-JUST',
-          title: 'L’extracteur de données d’activité',
-          description: '',
-          image: '/assets/images/Tableur2.svg',
-          url: environment.sourceUrl + 'dashboard',
-          localUrl: true,
-        },
-      ];
+  docTools: Array<DocCardInterface> = [
+    this.nomenclature,
+    {
+      tag: 'Les outils A-JUST',
+      title: 'La calculatrice de ventilation des ETPT',
+      description: '',
+      image: '/assets/images/coding.svg',
+      url: environment.CALCULATE_DOWNLOAD_URL,
+    },
+    {
+      tag: 'Les outils A-JUST',
+      title: 'L’extracteur de données d’effectifs',
+      description: '',
+      image: '/assets/images/Tableur.svg',
+      url: environment.sourceUrl + 'dashboard',
+      localUrl: true,
+    },
+    {
+      tag: 'Les outils A-JUST',
+      title: 'L’extracteur de données d’activité',
+      description: '',
+      image: '/assets/images/Tableur2.svg',
+      url: environment.sourceUrl + 'dashboard',
+      localUrl: true,
+    },
+  ];
   /**
    * webinaire
    */
