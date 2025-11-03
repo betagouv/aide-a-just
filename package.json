@@ -1,6 +1,6 @@
 {
   "name": "aide-a-just",
-  "version": "0.0.0",
+  "version": "3.0.2",
   "engines": {
     "node": "22",
     "npm": "11.5.2"
