@@ -10,6 +10,7 @@ const csp = {
   contentSecurityPolicy: {
     directives: {
       defaultSrc: ["'self'", '*.hs-scripts.com', '*.beta.gouv.fr', '*.incubateur.net', '*.gitbook.com'],
+      scriptSrc: ["'self'", '*.hs-scripts.com', '*.beta.gouv.fr', '*.incubateur.net', '*.gitbook.com'],
     },
   },
 };
