@@ -106,6 +106,7 @@
                           @for (leaf of links.leaves; track leaf.text) {
                             <a
                               target="_blank"
+                              rel="noreferrer"
                               [href]="textNode?.data?.ref?.url"
                               [ngClass]="{ bold: isBold(leaf), italic: isItalic(leaf), underline: isUnderline(leaf) }"
                             >
@@ -137,6 +138,7 @@
                                     @for (leaf of links.leaves; track leaf.text) {
                                       <a
                                         target="_blank"
+                                        rel="noreferrer"
                                         [href]="textNode?.data?.ref?.url"
                                         [ngClass]="{
                                           bold: isBold(leaf),
@@ -157,6 +159,7 @@
                               @for (leaf of links.leaves; track leaf.text) {
                                 <a
                                   target="_blank"
+                                  rel="noreferrer"
                                   [href]="itemList?.data?.ref?.url"
                                   [ngClass]="{
                                     bold: isBold(leaf),
@@ -185,6 +188,7 @@
                                   @for (leaf of links.leaves; track leaf.text) {
                                     <a
                                       target="_blank"
+                                      rel="noreferrer"
                                       [href]="subItemList?.data?.ref?.url"
                                       [ngClass]="{
                                         bold: isBold(leaf),
@@ -213,6 +217,7 @@
                               @for (leaf of links.leaves; track leaf.text) {
                                 <a
                                   target="_blank"
+                                  rel="noreferrer"
                                   [href]="textNode?.data?.ref?.url"
                                   [ngClass]="{
                                     bold: isBold(leaf),
@@ -252,6 +257,7 @@
                               @for (leaf of links.leaves; track leaf.text) {
                                 <a
                                   target="_blank"
+                                  rel="noreferrer"
                                   [href]="itemList?.data?.ref?.url"
                                   [ngClass]="{
                                     bold: isBold(leaf),
