@@ -7,6 +7,11 @@ const helmet = require('helmet');
 
 const csp = {
   xFrameOptions: false,
+  contentSecurityPolicy: {
+    directives: {
+      defaultSrc: ["'self'", 'https://*.hs-scripts.com', '*.beta.gouv.fr', '*.incubateur.net'],
+    },
+  },
 };
 // Activer la compression gzip pour toutes les réponses
 app.use(
