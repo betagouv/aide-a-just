@@ -9,7 +9,7 @@ const csp = {
   xFrameOptions: false,
   contentSecurityPolicy: {
     directives: {
-      defaultSrc: ["'self'", 'https://*.hs-scripts.com', '*.beta.gouv.fr', '*.incubateur.net'],
+      defaultSrc: ["'self'", '*.hs-scripts.com', '*.beta.gouv.fr', '*.incubateur.net', '*.gitbook.com'],
     },
   },
 };
