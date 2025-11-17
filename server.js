@@ -3,7 +3,11 @@ const express = require('express');
 const path = require('path');
 const compression = require('compression');
 const app = express();
+const helmet = require('helmet');
 
+const csp = {
+  xFrameOptions: false,
+};
 // Activer la compression gzip pour toutes les réponses
 app.use(
   compression({
@@ -16,8 +20,10 @@ app.use(
       }
       return compression.filter(req, res);
     },
-  })
+  }),
 );
+
+app.use(helmet(csp));
 
 // Servir les fichiers statiques du dossier dist/browser
 app.use(express.static(path.join(__dirname, '/dist/aide-a-just/browser')));
