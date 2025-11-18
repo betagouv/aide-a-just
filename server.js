@@ -60,6 +60,7 @@ const csp = {
         '*.incubateur.net',
         '*.gitbook.com',
         '*.hubspot.com',
+        '*.hsforms.com',
       ],
       childSrc: ["'self'", '*.hsforms.net', '*.beta.gouv.fr', '*.incubateur.net', '*.gitbook.com', '*.hsforms.com'],
       fontSrc: [
