@@ -40,6 +40,8 @@ const csp = {
         '*.hscollectedforms.net',
         '*.hs-banner.com',
         '*.hsforms.com',
+        '*.hubspot.com',
+        '*.hsappstatic.net',
       ],
       frameSrc: ["'self'", '*.hsforms.net', '*.beta.gouv.fr', '*.incubateur.net', '*.gitbook.com', '*.hsforms.com'],
       imgSrc: ["'self'", '*.hs-scripts.com', '*.hsforms.net', '*.beta.gouv.fr', '*.incubateur.net', '*.gitbook.com'],
