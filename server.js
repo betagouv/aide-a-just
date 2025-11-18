@@ -73,6 +73,7 @@ const csp = {
         '*.hubspot.com',
         '*.gstatic.com',
       ],
+      scriptSrcAttr: ["'unsafe-inline'"],
     },
   },
 };
