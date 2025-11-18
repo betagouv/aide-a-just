@@ -53,6 +53,7 @@ const csp = {
         '*.hsforms.com',
         '*.hubspot.com',
         '*.calendly.com',
+        'calendly.com',
       ],
       imgSrc: [
         "'self'",
