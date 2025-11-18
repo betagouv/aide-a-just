@@ -29,6 +29,7 @@ const csp = {
         '*.hscollectedforms.net',
         '*.hs-banner.com',
         'hubspot-forms-static-embed-eu1.s3.amazonaws.com',
+        '*.calendly.com',
       ],
       connectSrc: [
         "'self'",
