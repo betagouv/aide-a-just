@@ -9,8 +9,24 @@ const csp = {
   xFrameOptions: false,
   contentSecurityPolicy: {
     directives: {
-      defaultSrc: ["'self'", '*.hs-scripts.com', '*.beta.gouv.fr', '*.incubateur.net', '*.gitbook.com'],
-      scriptSrc: ["'self'", '*.hs-scripts.com', '*.beta.gouv.fr', '*.incubateur.net', '*.gitbook.com'],
+      defaultSrc: [
+        "'self'",
+        '*.hs-scripts.com',
+        '*.hsforms.net',
+        '*.beta.gouv.fr',
+        '*.incubateur.net',
+        '*.gitbook.com',
+      ],
+      scriptSrc: ["'self'", '*.hs-scripts.com', '*.hsforms.net', '*.beta.gouv.fr', '*.incubateur.net', '*.gitbook.com'],
+      connectSrc: [
+        "'self'",
+        '*.hs-scripts.com',
+        '*.hsforms.net',
+        '*.beta.gouv.fr',
+        '*.incubateur.net',
+        '*.gitbook.com',
+      ],
+      frameSrc: ["'self'", '*.hsforms.net', '*.beta.gouv.fr', '*.incubateur.net', '*.gitbook.com'],
     },
   },
 };
