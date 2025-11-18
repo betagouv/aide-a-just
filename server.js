@@ -71,6 +71,7 @@ const csp = {
         '*.incubateur.net',
         '*.gitbook.com',
         '*.hubspot.com',
+        '*.gstatic.com',
       ],
     },
   },
