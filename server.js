@@ -43,7 +43,15 @@ const csp = {
         '*.hubspot.com',
         '*.hsappstatic.net',
       ],
-      frameSrc: ["'self'", '*.hsforms.net', '*.beta.gouv.fr', '*.incubateur.net', '*.gitbook.com', '*.hsforms.com'],
+      frameSrc: [
+        "'self'",
+        '*.hsforms.net',
+        '*.beta.gouv.fr',
+        '*.incubateur.net',
+        '*.gitbook.com',
+        '*.hsforms.com',
+        '*.hubspot.com',
+      ],
       imgSrc: [
         "'self'",
         '*.hs-scripts.com',
@@ -54,6 +62,15 @@ const csp = {
         '*.hubspot.com',
       ],
       childSrc: ["'self'", '*.hsforms.net', '*.beta.gouv.fr', '*.incubateur.net', '*.gitbook.com', '*.hsforms.com'],
+      fontSrc: [
+        "'self'",
+        '*.hs-scripts.com',
+        '*.hsforms.net',
+        '*.beta.gouv.fr',
+        '*.incubateur.net',
+        '*.gitbook.com',
+        '*.hubspot.com',
+      ],
     },
   },
 };
