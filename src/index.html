@@ -16,5 +16,34 @@
     <!-- Start of HubSpot Embed Code -->
     <script type="text/javascript" id="hs-script-loader" async defer src="//js-eu1.hs-scripts.com/26493393.js"></script>
     <!-- End of HubSpot Embed Code -->
+    <!-- Script pour ouvrir la modale HubSpot par défaut -->
+    <script type="text/javascript">
+      (function () {
+        // Vérifier si contact=true est présent dans l'URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const contactParam = urlParams.get('contact');
+
+        if (contactParam !== 'true') {
+          return; // Ne pas ouvrir la modale si contact=true n'est pas présent
+        }
+
+        function openHubSpotModal() {
+          if (window.HubSpotConversations && window.HubSpotConversations.widget) {
+            window.HubSpotConversations.widget.open();
+          } else {
+            // Réessayer après un court délai si HubSpot n'est pas encore chargé
+            setTimeout(openHubSpotModal, 100);
+          }
+        }
+        // Attendre que le DOM soit prêt
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', function () {
+            setTimeout(openHubSpotModal, 1000);
+          });
+        } else {
+          setTimeout(openHubSpotModal, 1000);
+        }
+      })();
+    </script>
   </body>
 </html>
