@@ -30,6 +30,7 @@ const csp = {
         '*.hs-banner.com',
         'hubspot-forms-static-embed-eu1.s3.amazonaws.com',
         '*.calendly.com',
+        "'sha256-5zGTFBntUWIvHjc9B84iPIn4sZj33n/1R71pQqAtxj0='",
       ],
       connectSrc: [
         "'self'",
