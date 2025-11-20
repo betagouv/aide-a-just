@@ -15,7 +15,7 @@
     @for (card of docTools; track card.title) {
       <div>
         <img [src]="card.image" alt="a-just" (click)="goToLink(card.url)" />
-        <p (click)="goToLink(card.url)">{{ card.title }}</p>
+        <a [href]="card.url" target="_blank" rel="noreferrer">{{ card.title }}</a>
         @if (card.download) {
           <i (click)="goToLink(card.url, true)" class="ri-file-download-line"></i>
         }
