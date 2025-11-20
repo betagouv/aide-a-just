@@ -137,7 +137,7 @@ export class HomePage implements OnInit, AfterViewInit {
   /**
    * webinaire
    */
-  webinaires: Array<webinaire> | null = null;
+  webinaires: Array<webinaire> | null = [];
 
   /**
    * Ouverture d'un iframe gitbook embeded
@@ -213,7 +213,7 @@ export class HomePage implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
-    this.loadWebinaires();
+    //this.loadWebinaires();
   }
 
   ngAfterViewInit(): void {
