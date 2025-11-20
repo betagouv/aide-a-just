@@ -60,14 +60,14 @@
     </div>
     <div class="line"></div>
     <div class="action-area">
-      <div class="clickable-link" (click)="goToLink(userGuide.url)">
+      <a class="clickable-link" [href]="userGuide.url" target="_blank" rel="noreferrer">
         <img [src]="userGuide.image" alt="a-just" />
         <p class="title">{{ userGuide.title }}</p>
-      </div>
-      <div class="clickable-link" (click)="goToLink(dataBook.url)">
+      </a>
+      <a class="clickable-link" [href]="dataBook.url" target="_blank" rel="noreferrer">
         <img [src]="dataBook.image" alt="a-just" />
         <p class="title">{{ dataBook.title }}</p>
-      </div>
+      </a>
       <a routerLink="/etre-appele" class="clickable-link">
         <img src="/assets/images/call-center.png" alt="a-just" />
         <p class="title">Être recontacté</p>
