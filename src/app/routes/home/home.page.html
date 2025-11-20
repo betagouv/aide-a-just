@@ -363,7 +363,6 @@
     </div>
   }
 
-  @if (environment.isTJ) {
     <p class="sub-title">Questions fréquentes</p>
     <div class="suggestion">
       <div (click)="openToIframe = documentation[0]; reloadContent()">
@@ -415,9 +414,9 @@
         <mat-icon>arrow_forward</mat-icon>
       </div>
     </div>
-  }
 
-  @if (environment.isTJ) {
+
+  
     <p class="sub-title">Webinaires</p>
 
     <div class="content-area">
@@ -442,7 +441,7 @@
         </div>
       }
     </div>
-  }
+  
 }
 @if (openSuggestionPanel) {
   <div class="open-panel animate__animated">

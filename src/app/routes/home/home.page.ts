@@ -161,22 +161,22 @@ export class HomePage implements OnInit, AfterViewInit {
    */
   documentation = [
     {
-      url: 'https://docs.a-just.beta.gouv.fr/tout-savoir-en-un-coup-doeil/',
+      url:   this.isTJ()?'https://docs.a-just.beta.gouv.fr/tout-savoir-en-un-coup-doeil/':'https://docs.a-just.beta.gouv.fr/tout-savoir-en-un-coup-doeil-ca/',
       title: "Tout savoir en un coup d'oeil",
       color: 'blue',
     },
     {
-      url: 'https://docs.a-just.beta.gouv.fr/prenez-en-main-votre-espace/',
+      url: this.isTJ()?'https://docs.a-just.beta.gouv.fr/prenez-en-main-votre-espace/':'https://docs.a-just.beta.gouv.fr/prenez-en-main-votre-espace-ca/',
       title: 'Prenez en main votre espace',
       color: 'green',
     },
     {
-      url: 'https://docs.a-just.beta.gouv.fr/pilotez-votre-juridiction/',
+      url: this.isTJ()?'https://docs.a-just.beta.gouv.fr/pilotez-votre-juridiction/':'https://docs.a-just.beta.gouv.fr/pilotez-votre-juridiction-ca/',
       title: 'Pilotez votre juridiction',
       color: 'red',
     },
     {
-      url: 'https://docs.a-just.beta.gouv.fr/cas-dusage/',
+      url: this.isTJ()?'https://docs.a-just.beta.gouv.fr/cas-dusage/':'https://docs.a-just.beta.gouv.fr/cas-dusage-ca   /',
       title: 'Cas d’usage',
       color: 'yellow',
     },
@@ -194,6 +194,10 @@ export class HomePage implements OnInit, AfterViewInit {
    * Organisation ID gitbook
    */
   organisationId = import.meta.env.NG_APP_GITBOOK_ORG_ID;
+  /**
+   * Type d'interface
+   */
+  interfaceType = import.meta.env.TYPE;
   /**
    * Bloqueur pour le prompteur en cas de valeur vide dans la barre de recherche
    */
@@ -225,6 +229,10 @@ export class HomePage implements OnInit, AfterViewInit {
     window.addEventListener('click', this.onClick.bind(this));
   }
 
+  isTJ(): boolean {
+    return this.interfaceType === 'TJ';
+  }
+  
   loseFocus() {
     console.log(this.searchInput);
     this.searchInput.triggerBlur();

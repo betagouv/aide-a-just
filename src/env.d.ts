@@ -6,6 +6,7 @@ declare interface Env {
   readonly NG_APP_GITBOOK_ID: string;
   readonly NG_APP_GITBOOK_ORG_ID: string;
   readonly NG_APP_GITBOOK_TOKEN: string;
+  readonly TYPE: string;
   [key: string]: any;
 }
 
