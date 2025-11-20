@@ -428,11 +428,8 @@
             <p class="title">{{ webinaire.title }}</p>
             <p class="content">{{ webinaire.content }}</p>
             <div class="action">
-              @if (webinaire.action[0] !== null) {
-                <div (click)="openLink(webinaire.action[0])">M'inscrire</div>
-              }
-              @if (webinaire.action[1] !== null) {
-                <div (click)="openLink(webinaire.action[1])">En savoir plus</div>
+              @for (action of webinaire.actions; track action.url) {
+                <div (click)="openLink(action.url)">{{ action.label }}</div>
               }
             </div>
           </div>

@@ -65,6 +65,8 @@ const csp = {
         '*.gitbook.com',
         '*.hubspot.com',
         '*.hsforms.com',
+        '*.goopics.net',
+        
       ],
       childSrc: ["'self'", '*.hsforms.net', '*.beta.gouv.fr', '*.incubateur.net', '*.gitbook.com', '*.hsforms.com'],
       workerSrc: ["'self'", '*.hsforms.net', '*.beta.gouv.fr', '*.incubateur.net', '*.gitbook.com', '*.hsforms.com'],
