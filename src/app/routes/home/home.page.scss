@@ -349,6 +349,10 @@
         }
 
         .suggestion-header {
+            aj-button {
+                margin-left: 32px;
+            }
+
             .panel-header {
                 color: #666666;
                 font-size: 12px;
