@@ -78,6 +78,7 @@ const csp = {
         '*.gstatic.com',
       ],
       scriptSrcAttr: ["'unsafe-inline'"],
+      formAction: ["'self'", '*.hsforms.net', '*.beta.gouv.fr', '*.incubateur.net', '*.gitbook.com', '*.hsforms.com'],
     },
   },
 };
