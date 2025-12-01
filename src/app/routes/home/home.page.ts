@@ -197,7 +197,7 @@ export class HomePage implements OnInit, AfterViewInit {
   /**
    * Type d'interface
    */
-  interfaceType = import.meta.env.TYPE;
+  interfaceType = environment.isTJ?'TJ':'CA';//import.meta.env.TYPE;
   /**
    * Bloqueur pour le prompteur en cas de valeur vide dans la barre de recherche
    */
