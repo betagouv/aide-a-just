@@ -14,11 +14,16 @@ import { environment } from '../../../environments/environment';
 import { RouterModule } from '@angular/router';
 import { ButtonComponent } from '../../components/button/button.component';
 
+interface WebinaireAction {
+  label: string;
+  url: string;
+}
+
 interface webinaire {
   img: string;
   title: string;
   content: string;
-  action: string[];
+  actions: WebinaireAction[];
   rank: number;
 }
 /**
@@ -156,22 +161,22 @@ export class HomePage implements OnInit, AfterViewInit {
    */
   documentation = [
     {
-      url: 'https://docs.a-just.beta.gouv.fr/tout-savoir-en-un-coup-doeil/',
+      url:   this.isTJ()?'https://docs.a-just.beta.gouv.fr/tout-savoir-en-un-coup-doeil/':'https://docs.a-just.beta.gouv.fr/tout-savoir-en-un-coup-doeil-ca/',
       title: "Tout savoir en un coup d'oeil",
       color: 'blue',
     },
     {
-      url: 'https://docs.a-just.beta.gouv.fr/prenez-en-main-votre-espace/',
+      url: this.isTJ()?'https://docs.a-just.beta.gouv.fr/prenez-en-main-votre-espace/':'https://docs.a-just.beta.gouv.fr/prenez-en-main-votre-espace-ca/',
       title: 'Prenez en main votre espace',
       color: 'green',
     },
     {
-      url: 'https://docs.a-just.beta.gouv.fr/pilotez-votre-juridiction/',
+      url: this.isTJ()?'https://docs.a-just.beta.gouv.fr/pilotez-votre-juridiction/':'https://docs.a-just.beta.gouv.fr/pilotez-votre-juridiction-ca/',
       title: 'Pilotez votre juridiction',
       color: 'red',
     },
     {
-      url: 'https://docs.a-just.beta.gouv.fr/cas-dusage/',
+      url: this.isTJ()?'https://docs.a-just.beta.gouv.fr/cas-dusage/':'https://docs.a-just.beta.gouv.fr/cas-dusage-ca   /',
       title: 'Cas d’usage',
       color: 'yellow',
     },
@@ -189,6 +194,10 @@ export class HomePage implements OnInit, AfterViewInit {
    * Organisation ID gitbook
    */
   organisationId = import.meta.env.NG_APP_GITBOOK_ORG_ID;
+  /**
+   * Type d'interface
+   */
+  interfaceType = environment.isTJ?'TJ':'CA';//import.meta.env.TYPE;
   /**
    * Bloqueur pour le prompteur en cas de valeur vide dans la barre de recherche
    */
@@ -213,13 +222,17 @@ export class HomePage implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
-    //this.loadWebinaires();
+    this.loadWebinaires();
   }
 
   ngAfterViewInit(): void {
     window.addEventListener('click', this.onClick.bind(this));
   }
 
+  isTJ(): boolean {
+    return this.interfaceType === 'TJ';
+  }
+  
   loseFocus() {
     console.log(this.searchInput);
     this.searchInput.triggerBlur();
@@ -314,9 +327,11 @@ export class HomePage implements OnInit, AfterViewInit {
    * Envoie de log
    */
   async sendLog() {
+    /**
     await this.serverService.post('centre-d-aide/log-documentation').then((r) => {
       return r.data;
     });
+    */
   }
 
   /**
@@ -359,6 +374,111 @@ export class HomePage implements OnInit, AfterViewInit {
   /**
    * Chargement des webinaires
    */
+  /**
+   * Extrait le texte d'un nœud de lien GitBook
+   * @param linkNode - Nœud de type link
+   * @returns Le texte du lien
+   */
+  private extractLinkText(linkNode: any): string {
+    try {
+      if (!linkNode) return '';
+      
+      // Fonction récursive pour extraire le texte de n'importe quel nœud
+      const extractTextFromNode = (node: any): string => {
+        if (!node) return '';
+        
+        // Si le nœud a des leaves (texte direct)
+        if (node.leaves && Array.isArray(node.leaves)) {
+          return node.leaves.map((leaf: any) => leaf.text || '').join('');
+        }
+        
+        // Si le nœud a des nodes enfants, parcourir récursivement
+        if (node.nodes && Array.isArray(node.nodes)) {
+          return node.nodes.map((childNode: any) => extractTextFromNode(childNode)).join('');
+        }
+        
+        return '';
+      };
+      
+      return extractTextFromNode(linkNode).trim();
+    } catch (error) {
+      console.log('Erreur lors de l\'extraction du texte du lien', error);
+      return '';
+    }
+  }
+
+  /**
+   * Extrait l'URL d'un nœud de lien GitBook
+   * @param linkNode - Nœud de type link
+   * @returns L'URL du lien
+   */
+  private extractLinkUrl(linkNode: any): string | null {
+    try {
+      // Essayer différentes structures possibles pour l'URL
+      if (linkNode.data?.url) {
+        return linkNode.data.url;
+      }
+      if (linkNode.data?.ref?.url) {
+        return linkNode.data.ref.url;
+      }
+      if (linkNode.data?.href) {
+        return linkNode.data.href;
+      }
+    } catch (error) {
+      console.log('Erreur lors de l\'extraction de l\'URL du lien', error);
+    }
+    return null;
+  }
+
+  /**
+   * Parse les actions (boutons) depuis les nœuds GitBook
+   * @param nodes - Tableau de nœuds GitBook
+   * @param startIndex - Index de départ (après l'image et le texte descriptif)
+   * @returns Tableau d'actions avec label et URL
+   */
+  private parseActions(nodes: any[], startIndex: number): WebinaireAction[] {
+    const actions: WebinaireAction[] = [];
+    
+    // Parcourir tous les nœuds à partir de startIndex
+    for (let i = startIndex; i < nodes.length; i++) {
+      const node = nodes[i];
+      
+      // Si c'est un nœud de type link directement
+      if (node.type === 'link') {
+        const url = this.extractLinkUrl(node);
+        const label = this.extractLinkText(node);
+        if (url) {
+          // Si pas de label, utiliser l'URL comme label ou un label par défaut
+          const finalLabel = label || url;
+          actions.push({ label: finalLabel, url });
+        }
+      }
+      // Si c'est un paragraphe contenant un lien
+      else if (node.type === 'paragraph' && node.nodes) {
+        for (const textNode of node.nodes) {
+          if (textNode.type === 'link') {
+            const url = this.extractLinkUrl(textNode);
+            const label = this.extractLinkText(textNode);
+            if (url) {
+              // Si pas de label, utiliser l'URL comme label ou un label par défaut
+              const finalLabel = label || url;
+              actions.push({ label: finalLabel, url });
+            }
+          }
+        }
+      }
+      // Rétrocompatibilité : si le nœud a directement une URL (ancien format)
+      else if (node.data?.url && !node.data.url.match(/\.(jpg|jpeg|png|gif|webp|svg)$/i)) {
+        // C'est probablement un lien, pas une image
+        const url = node.data.url;
+        const label = this.extractLinkText(node) || url;
+        actions.push({ label, url });
+      }
+    }
+    
+    return actions;
+  }
+
   async loadWebinaires() {
     this.webinaires = new Array();
     const { data } = await this.gitbook.spaces.getPageByPath(this.gitbookId, 'accueil/');
@@ -367,11 +487,22 @@ export class HomePage implements OnInit, AfterViewInit {
       data.pages.map(async (page, index) => {
         const { data } = (await this.gitbook.spaces.getPageById(this.gitbookId, page.id)) as any;
         try {
+          const nodes = data.document?.nodes || [];
+          
+          // L'image est toujours le premier nœud
+          const img = nodes[0]?.data?.url || '';
+          
+          // Le texte descriptif est le deuxième nœud
+          const content = nodes[1]?.nodes?.[0]?.leaves?.[0]?.text || '';
+          
+          // Les actions commencent à partir du troisième nœud (index 2)
+          const actions = this.parseActions(nodes, 2);
+          
           let webinaire = {
-            img: data.document?.nodes[0].data.url,
+            img,
             title: data.title,
-            content: data.document?.nodes[1].nodes[0].leaves[0].text,
-            action: [data.document.nodes[2].data.url || null, data.document.nodes[3]?.data.url || null],
+            content,
+            actions,
             rank: index,
           };
           if (data.title.includes('[CACHER]') === false) this.webinaires?.push(webinaire);
