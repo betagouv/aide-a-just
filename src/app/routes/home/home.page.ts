@@ -176,7 +176,7 @@ export class HomePage implements OnInit, AfterViewInit {
       color: 'red',
     },
     {
-      url: this.isTJ()?'https://docs.a-just.beta.gouv.fr/cas-dusage/':'https://docs.a-just.beta.gouv.fr/cas-dusage-ca   /',
+      url: this.isTJ()?'https://docs.a-just.beta.gouv.fr/cas-dusage/':'https://docs.a-just.beta.gouv.fr/cas-dusage-ca/',
       title: 'Cas d’usage',
       color: 'yellow',
     },
@@ -230,7 +230,7 @@ export class HomePage implements OnInit, AfterViewInit {
   }
 
   isTJ(): boolean {
-    return this.interfaceType === 'TJ';
+    return this.interfaceType === 'tj';
   }
   
   loseFocus() {
@@ -246,8 +246,6 @@ export class HomePage implements OnInit, AfterViewInit {
   async onSearchBy() {
     this.displayLoader = true;
     const { data } = await this.gitbook.orgs.askInOrganization(this.organisationId, { query: this.searchValue });
-    console.log(this.gitbook);
-    console.log(data);
     this.data = data;
     this.displayLoader = false;
   }
