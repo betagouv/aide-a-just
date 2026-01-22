@@ -230,8 +230,7 @@ export class HomePage implements OnInit, AfterViewInit {
   }
 
   isTJ(): boolean {
-    console.log(this.interfaceType);
-    return this.interfaceType === 'tj';
+    return environment.isTJ === true;
   }
   
   loseFocus() {
